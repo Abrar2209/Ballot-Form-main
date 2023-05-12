@@ -1,0 +1,65 @@
+:root {
+  --p-action-primary: #008060;
+  --p-action-primary-hovered: #006e52;
+  --p-action-primary-pressed: #005e46;
+  --p-action-critical-disabled: #f1f1f1;
+  --p-border: 1px solid #8c9196;
+  --p-focused: 2px solid #458fff;
+  --p-text-disabled: #8c9196;
+  --p-surface-dark: #202223;
+  --p-text-critical: #d82c0d;
+  --p-font-line-height-1: 16px;
+  --p-font-line-height-2: 20px;
+  --p-font-line-height-3: 24px;
+  --p-font-family-sans: -apple-system, BlinkMacSystemFont, "San Francisco",
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --p-font-size-100: 14px;
+  --p-font-size-200: 16px;
+  --p-font-size-300: 20px;
+  --p-font-size-400: 24px;
+  --p-font-size-500: 28px;
+  --p-font-size-600: 32px;
+  --p-font-size-700: 40px;
+}
+h1{
+    font-size: var(--p-font-size-700);
+}
+h2{
+    font-size: var(--p-font-size-600) ;
+}
+h3{
+    font-size: var(--p-font-size-500) ;
+}
+h4{
+    font-size: var(--p-font-size-400) ;
+}
+h5{
+    font-size: var(--p-font-size-300) ;
+}
+h6{
+    font-size: var( --p-font-size-200) ;
+}
+p,
+span,
+a {
+  font-size: var(--p-font-size-200);
+}
+html {
+  font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
+    Roboto, Helvetica Neue, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-size-adjust: 100%;
+
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+}

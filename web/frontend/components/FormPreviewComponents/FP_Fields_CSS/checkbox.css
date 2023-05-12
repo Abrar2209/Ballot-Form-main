@@ -1,0 +1,21 @@
+.checkbox-previewer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.checkbox-previewer label {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.checkbox-previewer span {
+  color: #353535;
+  font-size: 13px;
+}
+
+.checkbox-preview-input label {
+    font-weight: unset;
+    display: flex;
+    gap: 8px;
+}

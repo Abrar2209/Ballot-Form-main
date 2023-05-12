@@ -1,0 +1,31 @@
+:root {
+    --form-width:600px;
+    --form-background-color:#ffffff;
+    --header-title-color:#000000;
+    --header-desc-color:#000000;
+    --header-disc-color:#000000;
+    --input-label-color:#000000;
+    --input-background-color:#ffffff;
+    --input-text-color:#000000;
+    --input-placeholder-color:#000000;
+    --input-focus-color:#ffffff;
+    --button-color:#ffffff;
+    --input-border-color: #000;
+    --button-text-color:#000000;
+    --button-border-color: #000000;
+    --button-hover-background-color: #ffffff;
+    --button-hover-text-color: #000000;
+    --button-hover-border-color: #000000;
+    --label-font-size: 14;
+    --button-font-size: 14;
+    --disclaimer-font-size: 14;
+    --placeholder-font-size: 12;
+    --desc-font-size: 12;
+    --input-width-size: 100%;
+    --input-width-textarea: 100%;
+    --email-width-size: 100%;
+    --radio-width-size: 100%;
+    --checkbox-width-size: 100%;
+    --phone-width-size: 100%;
+    --form-width-size: 60%;
+}

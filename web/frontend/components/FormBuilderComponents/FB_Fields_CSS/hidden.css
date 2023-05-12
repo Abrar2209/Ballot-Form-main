@@ -1,0 +1,84 @@
+.hidden-container {
+    padding: 10px 20px;
+    font-family: 'Nunito Sans', sans-serif; 
+}
+
+.hidden-label {
+    width: 100%;
+}
+
+.hidden-inputs {
+    width: 100%;
+    margin: 5px 0px 20px;
+    padding: 8px 4px;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+}
+
+.hidden-check-inputs  {
+    padding: 8px 0;
+    border-radius: 3px;
+}
+
+.hidden-checkbox-input {
+    margin: 0px 10px 0px 0px;
+}
+
+.hidden-dropdown-inputs {
+    width: 100%;
+    margin: 5px 0px 20px;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.header-section-after-submit .dynamic-value-submission .btn-style {
+    background-color: #fff;
+  }
+  .header-section-after-submit
+    .dynamic-value-submission
+    .btn-style
+    .options
+    .btn-options-submit {
+    padding: 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-section-after-submit
+    .dynamic-value-submission
+    .btn-style
+    .options
+    .btn-options-submit
+    .copy-btn-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .header-section-after-submit
+    .dynamic-value-submission
+    .btn-style
+    .options
+    .btn-options-submit
+    .copy-btn-name
+    .copy-header {
+    border: 1px solid #cdd0d9;
+    border-radius: 5px;
+    padding: 6px 10px;
+    min-width: 154px;
+    text-align: center;
+  }
+  
+  .header-section-after-submit
+    .dynamic-value-submission
+    .btn-style
+    .options
+    .btn-options-submit
+    .copy-btn-name
+    .btn-copy {
+      border: none;
+      cursor: pointer;
+    }

@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+.checkbox-container {
+    padding: 10px 20px;
+    font-family: 'Nunito Sans', sans-serif; 
+}
+
+.checkbox-label {
+    width: 100%;
+}
+
+.checkbox-inputs {
+    width: 100%;
+    margin: 5px 0px 20px;
+    padding: 8px 4px;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+}
+
+.checkbox-check-inputs  {
+    padding: 8px 0;
+    border-radius: 3px;
+}
+
+.checkbox-check-input {
+    margin: 0px 10px 0px 0px;
+}
+
+.options-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.options-list li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    height: 40px;
+}
+
+.add-option_button{
+    margin-left: 5px;
+    width: 20%;
+    height: 40px;
+    border-radius: 6px;
+    padding: 0px 3px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-option_input{
+    width: 50%;
+    height: 40px;
+    border-radius: 6px;
+    outline: none;
+    padding: 0px 3px;
+    font-size: 16px;
+}
+
+.options-list input{
+    border: none;
+    background-color: transparent;
+    width: 7rem;
+    padding: 0px 3px;
+    font-size: 18px;
+}
+.options-list input:focus{
+    outline: none;
+}
+
+.radio-dropdown-inputs {
+    cursor: pointer;
+}

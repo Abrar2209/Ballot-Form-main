@@ -1,0 +1,22 @@
+.text-previewer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.text-previewer label {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.text-previewer input{
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 0.2rem;
+}
+
+.text-previewer span {
+  color: #353535;
+  font-size: 13px;
+}

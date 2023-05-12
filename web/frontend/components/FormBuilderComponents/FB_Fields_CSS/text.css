@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+.text-container {
+    padding: 10px 20px;
+    font-family: 'Nunito Sans', sans-serif; 
+}
+
+.text-label {
+    width: 100%;
+}
+
+.text-inputs {
+    width: 60%;
+    margin: 5px 0px 20px;
+    padding: 15px 11px;
+    border: 1px solid #CDD0D9;
+    border-radius: 3px;
+}
+
+.text-container {
+    padding: 10px 20px;
+    font-family: 'Nunito Sans', sans-serif;
+    margin-left: -30px;
+}
+
+.check-inputs  {
+    padding: 8px 0;
+    border-radius: 3px;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.checkbox-input {
+    margin: 0px 10px 0px 0px;
+    height: 15px;
+    width: 15px;
+    accent-color: #008060;
+    cursor: pointer;
+}

@@ -1,0 +1,21 @@
+<script>
+  console.log("Hello Dev!")
+  localStorage.setItem("FormBuilderAppCustomerID", "");
+</script>
+
+{% if customer %}
+  <script>
+    console.log("{{ customer.id }}")
+    localStorage.setItem("FormBuilderAppCustomerID", "{{ customer.id }}");
+  </script>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Formbuilder extension",
+    "target": "body",
+    "settings": [],
+    "stylesheet": "bundle.css",
+    "javascript": "bundle.js"
+  }
+{% endschema %}

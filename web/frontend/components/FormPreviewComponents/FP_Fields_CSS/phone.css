@@ -1,0 +1,23 @@
+.phone-previewer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.phone-previewer label {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.phone-previewer input {
+  padding: 0.5rem;
+  margin-bottom: 0.2rem;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.phone-previewer span {
+  color: #353535;
+  font-size: 13px;
+}

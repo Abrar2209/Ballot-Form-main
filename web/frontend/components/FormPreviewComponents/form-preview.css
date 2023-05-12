@@ -1,0 +1,25 @@
+.preview-component h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.preview-component h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.preview-component h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+}
+.preview-component h4 {
+  font-size: 1em;
+  font-weight: bold;
+}
+.preview-component h5 {
+  font-size: 0.83em;
+  font-weight: bold;
+}
+.preview-component h6 {
+  font-size: 0.67em;
+  font-weight: bold;
+}
