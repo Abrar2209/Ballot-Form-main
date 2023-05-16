@@ -260,14 +260,8 @@ export const handleAppSettingsReset = (value) => {
   };
   store.dispatch(resetAppSettings(appSettings));
 };
-export const handleKlaviyoIntegration = (section, key, value) => {
-  store.dispatch(
-    setKlaviyoIntegration({
-      section,
-      key,
-      value,
-    })
-  );
+export const handleKlaviyoIntegration = (key, value) => {
+  store.dispatch(setKlaviyoIntegration({ key, value }));
   console.log(value);
   axios.post('http://localhost:8080/api/klaviyo/list/subscribe',value)
       .then(response =>{

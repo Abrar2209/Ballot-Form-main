@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
 export const initialState = {
+  inputFields:{},
+  phoneInputError: false,
   name: "",
   id: undefined,
   status: false,
@@ -74,7 +76,15 @@ export const initialState = {
   klaviyoIntegration: {
     enable: false,
     defaultOption: "No value",
-    klaviyoListMapping: {}
+    klaviyoListMapping: [
+      {
+        klaviyo_field: "",
+        form_field: "",
+        is_default: true,
+        is_fixed: false,
+        is_input: ""
+      },
+    ],
   },
   afterSubmit: {
     defaultOption: 'Hide Form',
@@ -94,7 +104,8 @@ export const initialState = {
       secretKey: ''
     },
     klaviyoSetting: {
-      klaviyoApiKey: ''
+      klaviyoApiprivateKey: '',
+      klaviyoApipublicKey:''
     }
   },
   formSettings: {
@@ -143,7 +154,15 @@ const formSlice = createSlice({
       state.id = action.payload;
     },
     setFields: (state, action) => {
-      state.fields = action.payload;
+      //state.fields = action.payload;
+      const { values } = action.payload;
+      state.inputFields = { ...state.inputFields, ...values };
+    },
+    resetFields: (state) => {
+      state.inputFields = {};
+    },
+    setphoneError: (state, action) => {
+      state.phoneInputError = action.payload;
     },
     setMetaFields: (state, action) => {
       state.constantFields = action.payload;
@@ -194,6 +213,8 @@ const formSlice = createSlice({
 
 export const {
   setFields,
+  setphoneError, 
+  resetFields,
   setFormId,
   setFormName,
   setUpdateField,
