@@ -10,11 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleKlaviyoIntegration } from "../FormBuilderComponents/utils/handlers";
 import FormFields from "./FormFields";
 import { ids } from "../../pages/viewforms";
-
+import Custom from "./Custom";
 const Integration = ({ klaviyoIntegration }) => {
   const { enable, defaultOption, klaviyoListMapping } = klaviyoIntegration;
+  console.log(`enable, defaultOption, klaviyoListMapping ${klaviyoListMapping}`);
   const fetch = useAuthenticatedFetch();
   const { fields } = useSelector((state) => state.form);
+  console.log(`fields ${fields}`);
   const [selected, setSelected] = useState("Email");
   const [listNames, setListNames] = useState([]);
 
@@ -33,15 +35,14 @@ const Integration = ({ klaviyoIntegration }) => {
       console.error(error.message);
     }
   };
-  // fetch(`http://localhost:8080/api/data?id=${ids}`)
-  // .then(response => response.json())
-  // .then(data => {
-  //   // Handle the response data from the server
-  // })
-  // .catch(error => {
-  //   // Handle any errors
-  // });
-
+  fetch(`http://localhost:8080/api/data?id=${ids}`)
+  .then(response => response.json())
+  .then(data => {
+    // Handle the response data from the server
+  })
+  .catch(error => {
+    // Handle any errors
+  });
   const [dropdowns, setDropdowns] = useState([
     {
       id: "Shopify",
@@ -91,32 +92,50 @@ const Integration = ({ klaviyoIntegration }) => {
     setDropdowns(updatedDropdowns);
   };
 
-  const staticValues = [{ id: 1, label: "Fixed value" }];
+  let element;
+  for (let i = 0; i < nameOfFields.length; i++) {
+    element = nameOfFields[i].id;
+  }
+function filterObjectsWithPrefix(obj, prefix) {
+  const filteredArr = [];
 
-  // const [customFields, setCustomFields] = useState([]);
+  for (let key in obj) {
+    if (key.startsWith(prefix) && key !== '0') {
+      const customField = {
+        key: key,
+        value: obj[key],
+      };
+      filteredArr.push(customField);
+    }
+  }
 
-  // const handleAddField = () => {
-  //   setCustomFields([...customFields, ""]);
-  // };
+  return filteredArr;
+}
+  const filteredObj = filterObjectsWithPrefix(klaviyoListMapping, "custom");
+  
+  
+  const [customFields, setCustomFields] = useState(filteredObj);
+  const handleAddField = () => {
+    setCustomFields([...customFields, ""]);
+  };
 
-  // const handleCustomFieldChange = (index, value) => {
-  //   console.log("index, value", index, value);
-  //   console.log("customFields", customFields);
-  //   const updatedFields = [...customFields];
-  //   updatedFields[index] = value;
-  //   setCustomFields(updatedFields);
-  // };
+  const handleCustomFieldChange = (index, value) => {
+    console.log("index, value", index, value);
+    console.log("customFields", customFields);
+    const updatedFields = [...customFields];
+    updatedFields[index] = value;
+    setCustomFields(updatedFields);
+  };
 
   const [inputValues, setInputValues] = useState("");
 
   const handleInputChange = (id, value) => {
     setInputValues((prevInputValues) => ({
       ...prevInputValues,
-      [id]: value
+      [id]: value,
     }));
   };
 
-  console.log(`input`);
   return (
     <div className="design-layout">
       {dropdowns.map((dropdown) => (
@@ -174,7 +193,7 @@ const Integration = ({ klaviyoIntegration }) => {
                           >
                             {listNames.map((item) => (
                               <option
-                                value={`${item.id},${item.attributes.name}`}
+                                value={`${item.id}`}
                                 key={item.id}
                               >
                                 {item.attributes.name}
@@ -201,199 +220,23 @@ const Integration = ({ klaviyoIntegration }) => {
                               klaviyoListMapping={klaviyoListMapping}
                               fields={fields}
                             />
-                          ))}
+                          ))}                        
+                          {customFields.map((field, index) => (
+                              <Custom
+                                key={field.id}
+                                index={index}
+                                field={field}
+                                element={element + 1}
+                                klaviyoListMapping={klaviyoListMapping}
+                                fields={fields}
+                              />
+                            ))}
 
-                          {/* {customFields.map((field, index) => 
-                          <Custom
-                            key={field.id}
-                            field={field}
-                            klaviyoListMapping={klaviyoListMapping}
-                            fields={fields}
-                          />
-                          )} */}
-
-
-                          
-                          {/* {customFields.length > 0 && (
-                            <>
-                              {customFields.map((field, index) => {
-                                const fieldId = `custom-${index}`;
-                                const mapping = klaviyoListMapping[fieldId];
-                                const selectedValue = mapping ? mapping.form_field : "";
-                                const isDefault = mapping ? mapping.is_default : false;
-                                let isFixed = mapping ? mapping.is_fixed : false;
-                                const isFieldSelected = selectedValue === "1";
-                                const handleFieldChange = (e) => {
-                                  const selectedOption = fields.find(
-                                    (option) => option.id === e.target.value
-                                  );
-                                  isFixed = selectedOption && selectedOption.label === "Fixed value";
-                                  const updatedMapping = {
-                                    klaviyo_field: customFields[index],
-                                    form_field: selectedOption ? selectedOption.id : e.target.value, 
-                                    is_default: isDefault,
-                                    is_fixed: isFixed ? false : true || inputValues,
-                                  };
-                                  const updatedListMapping = {
-                                    ...klaviyoListMapping,
-                                    [fieldId]: updatedMapping,
-                                  };
-                                  handleKlaviyoIntegration(
-                                    "klaviyoListMapping",
-                                    updatedListMapping
-                                  );
-                                };
-                                return (
-                                  <div className="field" key={index}>
-                                    <input
-                                      type="text"
-                                      key={fieldId}
-                                      value={field}
-                                      onChange={(e) =>
-                                        handleCustomFieldChange(
-                                          index,
-                                          e.target.value
-                                        )
-                                      }
-                                    />
-                                    <select
-                                      className="select-formlist"
-                                      value={selectedValue}
-                                      onChange={handleFieldChange}
-                                    >
-                                      <option value="">No value</option>
-                                      {[
-                                        ...staticValues.map((option) => (
-                                          <option
-                                            value={option.id}
-                                            key={option.id}
-                                            selected={
-                                              klaviyoListMapping[field.id]
-                                                ?.form_field === option.id
-                                            }
-                                          >
-                                            {option.label}
-                                          </option>
-                                        )),
-                                        ...fields.map((option) => (
-                                          <option
-                                            value={option.id}
-                                            key={option.id}
-                                            selected={
-                                              klaviyoListMapping[field.id]
-                                                ?.form_field === option.id
-                                            }
-                                          >
-                                            {option.label}
-                                          </option>
-                                        )),
-                                      ]}
-                                    </select>
-                                    {isFixed &&
-                                      isFieldSelected &&
-                                      selectedValue === "1" && (
-                                        <>
-                                          <input
-                                            key={`input-${fieldId}`}
-                                            type="text"
-                                            value={inputValues[fieldId] || ""}
-                                            onChange={(e) =>
-                                              handleInputChange(
-                                                fieldId,
-                                                e.target.value
-                                              )
-                                            }
-                                          />
-                                        </>
-                                      )}
-                                  </div>
-                                );
-                              })}
-                            </>
-                          )}
                           <div>
                             <button onClick={handleAddField}>
                               Add Custom Field
                             </button>
-                          </div> */}
-                          {/* 
-{customFields.map((field, index) => {
-  const fieldId = `custom-${index}`; 
-  const mapping = klaviyoListMapping[fieldId];
-  const selectedValue = mapping ? mapping.form_field : "";
-  const isDefault = mapping ? mapping.is_default : false;
-  let isFixed = mapping ? mapping.is_fixed : false;
-  const isFieldSelected = selectedValue === "1";
-
-  const handleFieldChange = (e) => {
-    const selectedOption = fields.find((option) => option.id === e.target.value);
-    isFixed = selectedOption && selectedOption.label === "Fixed value";
-    const updatedMapping = {
-      form_field: selectedOption ? selectedOption.id : e.target.value,
-      is_default: isDefault,
-      is_fixed: isFixed,
-    };
-    const updatedListMapping = {
-      ...klaviyoListMapping,
-      [fieldId]: updatedMapping,
-    };
-    handleKlaviyoIntegration("klaviyoListMapping", updatedListMapping);
-  };
-
-  return (
-    <div className="field" key={index}>
-      <input
-        type="text"
-        key={fieldId}
-        value={field.label}
-        onChange={(e) => handleCustomFieldChange(index, e.target.value)}
-      />
-      <select
-        className="select-formlist"
-        value={selectedValue}
-        onChange={handleFieldChange}
-      >
-        <option value="">No value</option>
-        {[
-          ...staticValues.map((option) => (
-            <option
-              value={option.id}
-              key={option.id}
-              selected={
-                klaviyoListMapping[fieldId]?.form_field === option.id
-              }
-            >
-              {option.label}
-            </option>
-          )),
-          ...fields.map((option) => (
-            <option
-              value={option.id}
-              key={option.id}
-              selected={
-                klaviyoListMapping[fieldId]?.form_field === option.id
-              }
-            >
-              {option.label}
-            </option>
-          )),
-        ]}
-      </select>
-      {isFixed && isFieldSelected && selectedValue === "1" && (
-        <input
-          key={`input-${fieldId}`}
-          type="text"
-          value={inputValues[fieldId] || ""}
-          onChange={(e) => handleInputChange(fieldId, e.target.value)}
-        />
-      )}
-    </div>
-  );
-})}
-
-<div>
-  <button onClick={handleAddField}>Add Custom Field</button>
-</div> */}
+                          </div>
                         </>
                       </div>
                     </>
@@ -407,87 +250,7 @@ const Integration = ({ klaviyoIntegration }) => {
       ))}
     </div>
   );
+
 };
 
 export default Integration;
-
-{
-  /* Fixed value dynamically */
-}
-{
-  /* {nameOfFields.map((field, index) => {
-  const mapping = klaviyoListMapping[field.id];
-  const selectedValue = mapping ? mapping.form_field : "";
-  const isDefault = mapping ? mapping.is_default : true;
-  const isFixed = mapping ? mapping.is_fixed : false;
-  const isFieldSelected = selectedValue === `fixed-${field.id}`;
-  const handleFieldChange = (e) => {
-    const selectedOption = fields.find((option) => option.id === e.target.value);
-    const isFixedSelected = e.target.value === `fixed-${field.id}`;
-    let inputValue= isFixedSelected ? inputValues[`${field.id}`] || "" : "";
-console.log(inputValues[`${field.id}`] );
-console.log(inputValue);
-    const updatedMapping = {
-      klaviyo_field: field.name,
-      form_field: selectedOption ? selectedOption.id : e.target.value,
-      is_default: isDefault,
-      is_fixed: isFixedSelected,
-      is_input: inputStore,
-    };
-
-    const updatedListMapping = {
-      ...klaviyoListMapping,
-      [field.id]: updatedMapping,
-    };
-
-    handleKlaviyoIntegration("klaviyoListMapping", updatedListMapping);
-  };
-
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    const dynamicId = `fixed-${field.id}`;
-
-    setInputValues((prevInputValues) => ({
-      ...prevInputValues,
-      [dynamicId]: value,
-    }));
-    setInputStore(value)
-   
-    // console.log(`value... ${value}`)
-
-  };
-
-  return (
-    <div className="field" key={field.id}>
-      <div className="header">{field.name}</div>
-      <select
-        className="select-formlist"
-        value={selectedValue}
-        onChange={handleFieldChange}
-      >
-        <option value={`fixed-${field.id}`} key={`fixed-${field.id}`}>Fixed value</option>
-        <option id={`No-${field.id}`} value="">No value</option>
-        {fields.map((option) => (
-          <option
-            value={option.id}
-            key={option.id}
-            selected={klaviyoListMapping[field.id]?.form_field === option.id}
-          >
-            {option.label}
-          </option>
-        ))}
-      </select>
-      {isFieldSelected && selectedValue === `fixed-${field.id}` && (
-        <>
-          <input
-            type="text"
-            value={inputValues[`fixed-${field.id}`] || ""}
-            onChange={handleInputChange}
-          />
-          <span>{inputValues[`fixed-${field.id}`]}</span>
-        </>
-      )}
-    </div>
-  );
-})} */
-}
